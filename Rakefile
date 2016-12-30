@@ -17,9 +17,6 @@ task :test do
       # TODO(@cpu): figure out how to upgrade Curl in CI
       /www\.froxlor\.org/,
       /kristaps\.bsd\.lv/,
-      # The ALA website seems to time out, skip it
-      # TODO(@cpu): figure out how to tweak typhoeus timeout
-      /www\.ala\.org/,
       # Crates.io returns errors when curl'd. Maybe UA/Content Type sniffing?
       # TODO(@cpu): figure out how to curl https://crates.io/ for HTML
       /crates\.io/,
@@ -29,6 +26,12 @@ task :test do
     ],
     :typhoeus => {
       :capath => "/etc/ssl/certs",
+      # Libcurl Connection reuse seems flaky on some versions
+      # Disabling it outright gives better results
+      :forbid_reuse => true,
+      # Using a more generous timeout as testing 282 links from a slower
+      # internet connection can produce frequent timeouts otherwise
+      :timeout => 15,
     }
   }).run
 end
