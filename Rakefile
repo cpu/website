@@ -15,8 +15,8 @@ task :test do
       /certificateautomation\.com/,
       # TLS 1.2 only sites are currently broken
       # TODO(@cpu): figure out how to upgrade Curl in CI
-      /www\.froxlor\.org/,
-      /kristaps\.bsd\.lv/,
+      #/www\.froxlor\.org/,
+      #/kristaps\.bsd\.lv/,
       # Crates.io returns a JSON error when curl'd unless an "Accept: text/html"
       # header is sent as well. Unfortunately setting that Accept globally
       # causes two other sites (likely using WAFs?) to forbid the requests.
