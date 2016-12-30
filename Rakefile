@@ -17,14 +17,12 @@ task :test do
       # TODO(@cpu): figure out how to upgrade Curl in CI
       /www\.froxlor\.org/,
       /kristaps\.bsd\.lv/,
-      # Crates.io returns errors when curl'd. Maybe UA/Content Type sniffing?
-      # TODO(@cpu): figure out how to curl https://crates.io/ for HTML
-      /crates\.io/,
       # Mojzis.com is failing with "SSL connect error", unclear why
       # TODO(@cpu): diagnose mojzis.com TLS error
       /mojzis\.com/,
     ],
     :typhoeus => {
+      # Without specifying the CA Path all TLS verification will fail
       :capath => "/etc/ssl/certs",
       # Libcurl Connection reuse seems flaky on some versions
       # Disabling it outright gives better results
@@ -32,6 +30,9 @@ task :test do
       # Using a more generous timeout as testing 282 links from a slower
       # internet connection can produce frequent timeouts otherwise
       :timeout => 15,
+      # Without specifying a browser-like Accept header `crates.io` will return
+      # a JSON API error
+      :headers => { :Accept => "text/html, application/xml, */*" },
     }
   }).run
 end
