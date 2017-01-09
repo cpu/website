@@ -31,7 +31,7 @@ task :test do
       /mojzis\.com/,
     ],
     :typhoeus => {
-      :capath => "/etc/ssl/certs",
+      #:capath => "/etc/ssl/certs",
     }
   }).run
 end
