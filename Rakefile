@@ -10,9 +10,6 @@ task :test do
       /expired-isrgrootx1\.letsencrypt\.org/,
       /revoked-isrgrootx1\.letsencrypt\.org/,
       /valid-isrgrootx1\.letsencrypt\.org/,
-      # Do not check the 'certificateautomation.com' website - it has a broken
-      # TLS configuration (missing intermediate)
-      /certificateautomation\.com/,
       # TLS 1.2 only sites are currently broken
       # TODO(@cpu): figure out how to upgrade Curl in CI
       /www\.froxlor\.org/,
