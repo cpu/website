@@ -10,10 +10,6 @@ task :test do
       /expired-isrgrootx1\.letsencrypt\.org/,
       /revoked-isrgrootx1\.letsencrypt\.org/,
       /valid-isrgrootx1\.letsencrypt\.org/,
-      # TLS 1.2 only sites are currently broken
-      # TODO(@cpu): figure out how to upgrade Curl in CI
-      /www\.froxlor\.org/,
-      /kristaps\.bsd\.lv/,
       # Crates.io returns a JSON error when curl'd unless an "Accept:
       # text/html" header is sent as well. Unfortunately setting that Accept
       # globally causes two other sites (likely using WAFs?) to forbid the
