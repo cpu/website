@@ -13,7 +13,7 @@ task :test do
       # Crates.io returns a JSON error when curl'd unless an "Accept:
       # text/html" header is sent as well. Unfortunately setting that Accept
       # globally causes two other sites (likely using WAFs?) to forbid the
-      # requests. For now, ignore.
+      # requests. For now, ignore crates.io.
       /crates\.io/,
     ],
     :typhoeus => {
@@ -21,8 +21,8 @@ task :test do
       # Libcurl Connection reuse seems flaky on some versions
       # Disabling it outright gives better results
       :forbid_reuse => true,
-      # Using a more generous timeout as testing 282 links from a slower
-      # internet connection can produce frequent timeouts otherwise
+      # The default Typhoeus timeout is low enough to cause intermitent failures
+      # (particularly for one or two slower websites).
       :timeout => 15,
     }
   }).run
